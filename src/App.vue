@@ -73,6 +73,7 @@ p.intro {
 	line-height: 24px;
 }
 a {
+	text-decoration: none;
 	color: #8eb640;
 }
 a:hover, a:focus {
@@ -86,15 +87,5 @@ ul, ol {
 	padding: 0;
 	-webkit-padding: 0;
 	-moz-padding: 0;
-}
-.btn:active, .btn.active {
-	background-image: none;
-	outline: 0;
-	-webkit-box-shadow: none;
-	box-shadow: none;
-}
-a:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
-	outline: none;
-	outline-offset: none;
 }
 </style>

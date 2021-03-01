@@ -3,10 +3,20 @@
         <nav id="menu" class="navbar navbar-default navbar-fixed-top">
             <div class="container">    
                 <ul class="nav navbar-nav ">
-                    <li class="getra active">Getränkekarte</li>
-                    <li class="speise">Speise Karte</li>
+                    <li class="getra active">
+                        <router-link :to="{ name: 'Index'}">
+                            Getränkekarte
+                        </router-link>
+                    </li>
+                     <li class="speise">
+                        <!-- <router-link to="speisekarte" tag="div"> -->
+                        Speise Karte
+                        <!-- </router-link> -->
+                    </li>
                     <li>
-                        <router-link :to="{name : 'AddMenuItem'}">Add Menu Item</router-link>
+                    <router-link :to="{name : 'AddMenuItem'}">
+                            Add Menu Item
+                    </router-link>
                     </li>
                 </ul>
             </div>
@@ -39,7 +49,7 @@ export default {
 	width: 100%;
 	text-align: center;
 }
-#menu.navbar-default .navbar-nav > li  {
+#menu.navbar-default .navbar-nav > li ,a {
 	text-transform: uppercase;
 	color: #eee;
 	font-weight: 400;
@@ -52,6 +62,7 @@ export default {
 	float: none !important;
 	display: inline-block;
 }
+
 #menu.navbar-default .navbar-nav > li:hover {
 	color: #ff800e;
 }
