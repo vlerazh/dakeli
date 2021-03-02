@@ -1,0 +1,62 @@
+<template>
+    <div class="speisekarte">
+        <div id="speisekarte" >
+        <div class="container">
+          <div class="section-title text-center">
+            <h2>Speisekarte</h2>
+          </div>
+          <div class="row" v-for="(itemS,index) in showSpeisekarteItems" :key="index">
+              <div class="menu-section">
+                <h2 class="menu-section-title" type="button" data-toggle="collapse" :data-target="'#'+itemS.slug" aria-expanded="false" :aria-controls="itemS.slug">{{itemS.subcategory}}</h2>
+                <div class="edit-div">
+                  <router-link :to="{ name:'EditMenuItem' , params: { item_slug: itemS.slug}}">
+                    <i class="material-icons">edit</i>
+                  </router-link>
+                </div>
+                  <div  class="collapse" :id="itemS.slug">
+                    <div class="row menu-item" v-for="(item,index) in itemS.items" :key="index">
+                      <div class="col-md-8 col-sm-8 col-8">
+                        <div class="menu-item-name">{{item.name}}</div>     
+                          <div class="menu-item-description">{{item.description}}</div>      
+                      </div>
+                      <div class="col-md-4 col-sm-4 col-4">
+                        <div class="col-md-12 col-xs-12 menu-item-price text-right">{{item.price}}</div>
+                      </div>      
+                    </div>
+                  <div >
+                </div>
+              </div>
+              </div>
+          </div>
+        </div>
+     </div>
+    </div>
+</template>
+
+<script>
+import db from '@/firebase/init'
+export default {
+    name:'Speisekarte',
+    data () {
+        return{
+            menuItems: [],
+        }
+    },
+    created(){
+        db.collection('menu').get()
+        .then(snapshot => {
+        snapshot.forEach(doc =>{
+            let menuItem = doc.data()
+            menuItem.id = doc.id
+            this.menuItems.push(menuItem)
+        })
+        })
+    },
+    computed:{
+        showSpeisekarteItems(){
+            return this.menuItems.filter(item => item.category === 'speisekarte')
+        }
+    }
+
+}
+</script>

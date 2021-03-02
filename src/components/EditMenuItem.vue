@@ -2,7 +2,7 @@
     <div class="add-item" v-if="menuItem">
         <div class="container">
                <div class="section-title text-center">
-                <h2>Add menu item </h2>
+                <h2>Edit menu item </h2>
             </div>
             <form v-on:keydown.enter.prevent @submit.prevent="editMenuItem">
                 <div class="input-group mb-3">
@@ -51,6 +51,9 @@ export default {
                 name:'',
                 description: '',
                 price: '',
+                volume: '',
+                secondPrice: '',
+                secondVolume: '',
              },
             feedback: null
         }
@@ -86,7 +89,7 @@ export default {
         },
         addItem(){
             if(this.another.name){
-                this.menuItem.items.push({ name: this.another.name, description: this.another.description, price:this.another.price});
+                this.menuItem.items.push({ name: this.another.name, description: this.another.description, price:this.another.price,volume:this.another.volume, secondPrice:this.another.secondPrice, secondVolume:this.another.secondVolume});
                 this.another.name = null;
                 this.another.description = null;
                 this.another.price = null;
@@ -115,8 +118,8 @@ form{
     margin: 5% 0;
 }
 .button{
-    border: 1px solid #b3742c;
-    background: #b3742c;
+    border: 1px solid #8d6e63;
+    background: #8d6e63;
     color: white;
     font-weight: 600;
     font-size:20px ;
@@ -135,6 +138,6 @@ form{
     width: 100%;
     font-size: 25px;
     margin-bottom: 2%;
-    color: #b3742c;
+    color: #8d6e63;
 }
 </style>
