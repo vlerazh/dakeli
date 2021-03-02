@@ -16,8 +16,8 @@
                     <input type="text" class="form-control" placeholder="Sub Category Name" aria-label="Username" aria-describedby="basic-addon1" v-model="subcategory">
                 </div>
                 <div class="input-group mb-3" v-for="(itm,index) in items" :key="index">
-                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" v-model="items[index].percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Name" aria-label="Username" aria-describedby="basic-addon1" v-model="items[index].name">
+                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" v-model="items[index].percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Description" aria-label="Username" aria-describedby="basic-addon1" v-model="items[index].description">
                     <input type="text" class="form-control" placeholder="Sub Category Item Volume" aria-label="Username" aria-describedby="basic-addon1" v-model="items[index].volume">
                     <input type="text" class="form-control" placeholder="Sub Category Item Price" aria-label="Username" aria-describedby="basic-addon1" v-model="items[index].price">
@@ -26,11 +26,11 @@
                     <i class="material-icons delete" @click="deleteIng(itm)">delete</i>
                 </div>
                 <div class="input-group mb-3" >
-                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" @keydown.enter="addItem" v-model="another.percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Name" aria-label="Name" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.name">
+                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" @keydown.enter="addItem" v-model="another.percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Description" aria-label="Description" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.description">
-                    <input type="text" class="form-control" placeholder="Sub Category Item Price" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.price">
                     <input type="text" class="form-control" placeholder="Sub Category Item Volume" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.volume">
+                    <input type="text" class="form-control" placeholder="Sub Category Item Price" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.price">
                     <input type="text" class="form-control" placeholder="Item Second Volume" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.secondVolume">
                     <input type="text" class="form-control" placeholder="Item Second Price" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.secondPrice">
                 </div>
@@ -43,7 +43,7 @@
 
 <script>
 import db from '@/firebase/init'
-
+import firebase from 'firebase'
 import slugify from 'slugify'
 export default {
     name:'AddMenuItem',
@@ -58,10 +58,11 @@ export default {
                 volume: '',
                 secondPrice: '',
                 secondVolume: '',
+                percentage: '',
              },
             slug: null,
             category: null,
-            feedback: null
+            feedback: null,
         }
     },
      methods: {
@@ -73,7 +74,7 @@ export default {
                 if(this.category && this.subcategory){
                 this.slug = slugify(this.subcategory, {
                     replacemen: '-',
-                    remove: /[$*_+~.();"!\-:@]/g,
+                    remove: /[$*_+~.();"'!/\-:@]/g,
                     lower: true
                 })
                     db.collection('menu').add({
@@ -81,8 +82,13 @@ export default {
                         subcategory: this.subcategory,
                         items: this.items,
                         slug: this.slug,
+                        date: Date.now()
                     }).then(() =>{
-                        this.$router.push({name: 'Index' })
+                        if(this.category == 'getränkekarte'){
+                            this.$router.push({name: 'Index' })
+                        }else{
+                             this.$router.push({name: 'Speisekarte' })
+                        }
                     }).catch(err =>{
                         console.log(err)
                     })
@@ -94,10 +100,14 @@ export default {
         },
         addItem(){
             if(this.another.name){
-                this.items.push({ name: this.another.name, description: this.another.description, price:this.another.price, volume:this.another.volume, secondPrice:this.another.secondPrice, secondVolume:this.another.secondVolume});
+                this.items.push({ name: this.another.name, description: this.another.description, price:this.another.price, volume:this.another.volume, secondPrice:this.another.secondPrice, secondVolume:this.another.secondVolume, percentage: this.another.percentage});
                 this.another.name = null;
                 this.another.description = null;
                 this.another.price = null;
+                this.another.volume = null;
+                this.another.secondPrice = null;
+                this.another.secondVolume = null;
+                this.another.percentage = null
                 this.feedback = null
             }else{
                 this.feedback = 'You must enter at least item name'

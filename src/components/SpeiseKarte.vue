@@ -3,7 +3,7 @@
         <div id="speisekarte" >
         <div class="container">
           <div class="section-title text-center">
-            <h2>Speisekarte</h2>
+            <h2>Speise karte</h2>
           </div>
           <div class="row" v-for="(itemS,index) in showSpeisekarteItems" :key="index">
               <div class="menu-section">
@@ -14,13 +14,22 @@
                   </router-link>
                 </div>
                   <div  class="collapse" :id="itemS.slug">
+                    <div class="row menu-items" > 
+                        <div class="offset-md-8  col-md-4  offset-sm-8  col-sm-4">
+                            <div class="col-md-9 col-sm-6 col-6 menu-item-price text-right">1/2 Port</div>
+                              <div class="col-md-3 col-sm-6 col-6 menu-item-price text-right">Port</div>   
+                            </div>      
+                    </div>
                     <div class="row menu-item" v-for="(item,index) in itemS.items" :key="index">
                       <div class="col-md-8 col-sm-8 col-8">
                         <div class="menu-item-name">{{item.name}}</div>     
                           <div class="menu-item-description">{{item.description}}</div>      
                       </div>
                       <div class="col-md-4 col-sm-4 col-4">
-                        <div class="col-md-12 col-xs-12 menu-item-price text-right">{{item.price}}</div>
+                          <div class="row">
+                            <div class="col-md-9 col-sm-6 col-6 menu-item-price text-right">{{item.volume}}</div>
+                            <div class="col-md-3 col-sm-6 col-6 menu-item-price text-right">{{item.price}}</div>
+                        </div>
                       </div>      
                     </div>
                   <div >

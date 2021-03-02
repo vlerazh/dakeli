@@ -53,7 +53,7 @@ export default {
     }
   },
   created(){
-    db.collection('menu').get()
+    db.collection('menu').orderBy('date','asc').get()
     .then(snapshot => {
       snapshot.forEach(doc =>{
         let menuItem = doc.data()

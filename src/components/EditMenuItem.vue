@@ -13,8 +13,8 @@
                 </div>
                 <div class="input-group mb-3" v-for="(itm,index) in menuItem.items" :key="index">
                     <span class="item-index">Item {{index}}</span>
-                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" v-model="menuItem.items[index].percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Name" aria-label="Username" aria-describedby="basic-addon1" v-model="menuItem.items[index].name">
+                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" v-model="menuItem.items[index].percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Description" aria-label="Username" aria-describedby="basic-addon1" v-model="menuItem.items[index].description">
                     <input type="text" class="form-control" placeholder="Sub Category Item Volume" aria-label="Username" aria-describedby="basic-addon1" v-model="menuItem.items[index].volume">
                     <input type="text" class="form-control" placeholder="Sub Category Item Price" aria-label="Username" aria-describedby="basic-addon1" v-model="menuItem.items[index].price">
@@ -23,8 +23,8 @@
                     <i class="material-icons delete" @click="deleteIng(itm)">delete</i>
                 </div>
                 <div class="input-group mb-3" >
-                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" @keydown.enter="addItem" v-model="another.percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Name" aria-label="Name" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.name">
+                    <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" @keydown.enter="addItem" v-model="another.percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Description" aria-label="Description" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.description">
                     <input type="text" class="form-control" placeholder="Sub Category Item Volume" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.volume">
                     <input type="text" class="form-control" placeholder="Sub Category Item Price" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.price">
@@ -54,6 +54,7 @@ export default {
                 volume: '',
                 secondPrice: '',
                 secondVolume: '',
+                percentage: '',
              },
             feedback: null
         }
@@ -89,11 +90,14 @@ export default {
         },
         addItem(){
             if(this.another.name){
-                this.menuItem.items.push({ name: this.another.name, description: this.another.description, price:this.another.price,volume:this.another.volume, secondPrice:this.another.secondPrice, secondVolume:this.another.secondVolume});
+                this.menuItem.items.push({ name: this.another.name, description: this.another.description, price:this.another.price,volume:this.another.volume, secondPrice:this.another.secondPrice, secondVolume:this.another.secondVolume, percentage: this.another.percentage});
                 this.another.name = null;
                 this.another.description = null;
                 this.another.price = null;
-                this.feedback = null
+                this.another.volume = null;
+                this.another.secondPrice = null;
+                this.another.secondVolume = null;
+                this.another.percentage = null
             }else{
                 this.feedback = 'You must enter ingredients'
             }

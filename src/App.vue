@@ -159,7 +159,6 @@ ul, ol {
 .menu-items {
 	margin: 0;
 	font-size: 10px;
-	margin-bottom: -36px;
 }
 
 .menu-items .menu-item-price {
@@ -175,6 +174,7 @@ ul, ol {
 
 .edit-div a{
   margin: 0 10px;
+  color: #8d6e63;
 }
 
 @media only screen and (max-width: 768px) {
@@ -201,7 +201,6 @@ ul, ol {
 		width: 350px;
 	}
 }
-
 @media only screen and (max-width: 450px) {
 	.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
 	.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
