@@ -187,6 +187,9 @@ ul, ol {
 	#banner img{
 		margin: 69px auto;
 	}
+	.edit-div{
+		top: 60px;
+		}
 }
 @media only screen and (max-width: 600px) {
 	header .intro-text {
@@ -213,6 +216,12 @@ ul, ol {
 	}
 	#banner img{
 		width: 300px;
+	}
+	.edit-div a{
+		margin: 0;
+	}
+	.edit-div{
+		top: 30px;
 	}
 }
 

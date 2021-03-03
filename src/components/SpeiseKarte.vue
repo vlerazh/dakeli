@@ -12,6 +12,7 @@
                   <router-link :to="{ name:'EditMenuItem' , params: { item_slug: itemS.slug}}">
                     <i class="material-icons">edit</i>
                   </router-link>
+                   <a @click="deleteSubcategory(itemS.id)"><i class="material-icons">delete</i></a>
                 </div>
                   <div  class="collapse" :id="itemS.slug">
                     <div class="row menu-items" > 
@@ -52,7 +53,7 @@ export default {
         }
     },
     created(){
-        db.collection('menu').get()
+        db.collection('menu').orderBy('date','asc').get()
         .then(snapshot => {
         snapshot.forEach(doc =>{
             let menuItem = doc.data()
@@ -64,6 +65,16 @@ export default {
     computed:{
         showSpeisekarteItems(){
             return this.menuItems.filter(item => item.category === 'speisekarte')
+        }
+    },
+    methods:{
+       deleteSubcategory(id){
+            db.collection('menu').doc(id).delete()
+            .then(()=>{
+                this.menuItems = this.menuItems.filter(item =>{
+                return item.id != id
+                })
+            })
         }
     }
 
