@@ -221,7 +221,7 @@ ul, ol {
 		margin: 0;
 	}
 	.edit-div{
-		top: 30px;
+		top: 0px;
 	}
 }
 

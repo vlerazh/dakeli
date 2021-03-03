@@ -26,9 +26,9 @@
                     <input type="text" class="form-control" placeholder="Sub Category Item Name" aria-label="Name" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.name">
                     <input type="text" class="form-control p" placeholder="Sub Category Percentage" aria-label="Username" aria-describedby="basic-addon1" @keydown.enter="addItem" v-model="another.percentage">
                     <input type="text" class="form-control" placeholder="Sub Category Item Description" aria-label="Description" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.description">
-                    <input type="text" class="form-control" placeholder="Sub Category Item Volume" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.volume">
+                    <input type="text" class="form-control" placeholder="Sub Category Item Volume(port)" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.volume">
                     <input type="text" class="form-control" placeholder="Sub Category Item Price" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.price">
-                    <input type="text" class="form-control" placeholder="Item Second Volume" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.secondVolume">
+                    <input type="text" class="form-control" placeholder="Item Second Volume(1/2 port)" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.secondVolume">
                     <input type="text" class="form-control" placeholder="Item Second Price" aria-label="Price" aria-describedby="basic-addon1"  @keydown.enter="addItem" v-model="another.secondPrice">
                 </div>
                 <p v-if="feedback">{{ feedback}}</p>

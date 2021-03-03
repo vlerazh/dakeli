@@ -15,7 +15,7 @@
                    <a @click="deleteSubcategory(itemS.id)"><i class="material-icons">delete</i></a>
                 </div>
                   <div  class="collapse" :id="itemS.slug">
-                    <div class="row menu-items" > 
+                    <div class="row menu-items" v-if="hasVolume == true"> 
                         <div class="offset-md-8  col-md-4  offset-sm-8  col-sm-4">
                             <div class="col-md-9 col-sm-6 col-6 menu-item-price text-right">1/2 Port</div>
                               <div class="col-md-3 col-sm-6 col-6 menu-item-price text-right">Port</div>   
@@ -28,7 +28,7 @@
                       </div>
                       <div class="col-md-4 col-sm-4 col-4">
                           <div class="row">
-                            <div class="col-md-9 col-sm-6 col-6 menu-item-price text-right">{{item.volume}}</div>
+                            <div class="col-md-9 col-sm-6 col-6 menu-item-price text-right" >{{item.volume}}</div>
                             <div class="col-md-3 col-sm-6 col-6 menu-item-price text-right">{{item.price}}</div>
                         </div>
                       </div>      
@@ -50,6 +50,7 @@ export default {
     data () {
         return{
             menuItems: [],
+            volume: null,
         }
     },
     created(){
@@ -59,12 +60,23 @@ export default {
             let menuItem = doc.data()
             menuItem.id = doc.id
             this.menuItems.push(menuItem)
-        })
+          })
         })
     },
     computed:{
         showSpeisekarteItems(){
             return this.menuItems.filter(item => item.category === 'speisekarte')
+        },
+        hasVolume(){
+          for(var i=0 ; i<this.menuItems.length;i++){
+            if(this.menuItems[i].volume !== null){
+              console.log("eshte true " + i)
+              return true;
+
+            }
+          }
+           console.log('jast if')
+           return false
         }
     },
     methods:{
